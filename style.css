@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f9f1;
+    background-color: #f0f4f8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,16 +10,17 @@ body {
 }
 
 .container {
-    background-color: #eef4db;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 320px;
 }
 
 h1 {
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 20px;
+    color: #333;
 }
 
 .reading {
@@ -28,20 +29,32 @@ h1 {
 
 .reading label {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #666;
 }
 
 .reading input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
-    height: 8px;
-    background: #ddd;
+    height: 10px;
     border-radius: 5px;
     outline: none;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity .15s ease-in-out;
+}
+
+#co2 {
+    background: linear-gradient(to right, green, green,red , red);
+}
+
+#temperature {
+    background: linear-gradient(to right, red, green, red);
+}
+
+#humidity {
+    background: linear-gradient(to right, red, green, red);
 }
 
 .reading input[type="range"]::-webkit-slider-thumb {
@@ -61,21 +74,23 @@ h1 {
     border: 2px solid #888;
 }
 
-.reading span {
-    display: block;
-    margin-top: 5px;
-}
-
 .reading .values {
     display: flex;
     justify-content: space-between;
-    margin-top: -10px;
-    font-size: 12px;
-    font-weight: bold;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.reading .current-value {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
 }
 
 p {
-    font-size: 14px;
-    color: #333;
+    font-size: 16px;
+    color: #555;
     margin-top: 20px;
+    font-weight: bold;
 }
