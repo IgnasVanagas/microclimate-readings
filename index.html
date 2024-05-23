@@ -4,32 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microclimate Readings</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>MIKROKLIMATO RODMENYS</h1>
-
+        
         <div class="reading">
             <label for="co2">CO2 kiekis ore</label>
-            <input type="range" id="co2" name="co2" min="0" max="2000" value="1000" disabled>
-            <span id="co2-value">1000</span>
+            <input type="range" id="co2" name="co2" min="0" max="2000" value="1500">
+            <div class="values">
+                <span>1000</span>
+                <span>&lt;1000</span>
+            </div>
         </div>
-
+        
         <div class="reading">
-            <label for="temperature">Patalpos temperat�ra</label>
-            <input type="range" id="temperature" name="temperature" min="0" max="50" value="22" disabled>
-            <span id="temperature-value">22</span>
+            <label for="temperature">Patalpos temperatūra</label>
+            <input type="range" id="temperature" name="temperature" min="0" max="50" value="22">
+            <div class="values">
+                <span>20</span>
+                <span>24</span>
+            </div>
         </div>
-
+        
         <div class="reading">
-            <label for="humidity">Patalpos oro dr�gnis</label>
-            <input type="range" id="humidity" name="humidity" min="0" max="100" value="50" disabled>
-            <span id="humidity-value">50</span>
+            <label for="humidity">Patalpos oro drėgnis</label>
+            <input type="range" id="humidity" name="humidity" min="0" max="100" value="50">
+            <div class="values">
+                <span>40</span>
+                <span>60</span>
+            </div>
         </div>
-
-        <p>J�s� darbo mikroklimatas yra optimalus</p>
+        
+        <p>Jūsų darbo mikroklimatas yra optimalus</p>
     </div>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
