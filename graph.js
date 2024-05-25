@@ -59,14 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     label: label,
                     data: data,
                     borderColor: borderColor,
-                    fill: false,
-                    tension: 0.1,
-                    pointRadius: 2
+                    fill: false
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 scales: {
                     x: {
                         type: 'time',
@@ -76,24 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             displayFormats: {
                                 hour: 'DD/MM/YYYY HH:mm'
                             }
-                        },
-                        title: {
-                            display: true,
-                            text: 'Time'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: label
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: '#333'
                         }
                     }
                 }
