@@ -23,8 +23,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateCurrentValues(data) {
         const latestData = data[data.length - 1];
-        document.getElementById('current-co2').innerText = latestData['CO2 ppm'] || 'N/A';
-        document.getElementById('current-temperature').innerText = latestData['Temperature Â°C'] || 'N/A';
-        document.getElementById('current-humidity').innerText = latestData['RH %'] || 'N/A';
+        const co2 = latestData['CO2 ppm'] || 'N/A';
+        const temperature = latestData['Temperature Â°C'] || 'N/A';
+        const humidity = latestData['RH %'] || 'N/A';
+        
+        // Update text values
+        document.getElementById('current-co2').innerText = co2;
+        document.getElementById('current-temperature').innerText = temperature;
+        document.getElementById('current-humidity').innerText = humidity;
+        
+        // Update input range values
+        document.getElementById('co2').value = co2;
+        document.getElementById('temperature').value = temperature;
+        document.getElementById('humidity').value = humidity;
+        
+        // Update value labels
+        document.getElementById('co2-value').innerText = co2;
+        document.getElementById('temperature-value').innerText = temperature;
+        document.getElementById('humidity-value').innerText = humidity;
     }
 });
