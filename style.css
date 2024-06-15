@@ -193,14 +193,30 @@ canvas {
     }
 }
 
+@media (max-width: 767px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .left-container, .right-container {
+        width: 100%;
+    }
+
+    .speedometer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .min-max-values {
+        margin-right: 0;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+}
+
 .speedometer-container {
     display: flex;
     align-items: center;
-}
-
-#status-text {
-    margin-left: 20px;
-    text-align: left;
 }
 
 .min-max-values {
@@ -212,4 +228,9 @@ canvas {
 
 .min-values, .max-values {
     margin-bottom: 20px;
+}
+
+#status-text {
+    margin-left: 20px;
+    text-align: left;
 }
