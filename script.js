@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
             reader.onload = function (e) {
                 const text = e.target.result;
                 const csvData = parseCSV(text);
-                updateCurrentValues(csvData);
+                const lastHourData = getLastHourData(csvData);
+                updateCurrentValues(csvData); // Update with the latest data
+                updateMinMaxValues(lastHourData); // Update min/max values for the last hour
                 localStorage.setItem('csvData', text); // Store CSV data in localStorage
             };
             reader.readAsText(file, 'ISO-8859-1');
@@ -19,6 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const rows = text.trim().split('\n').map(row => row.split(';'));
         const headers = rows.shift();
         return rows.map(row => Object.fromEntries(row.map((val, i) => [headers[i].trim(), val.trim()])));
+    }
+
+    function getLastHourData(data) {
+        const latestEntry = data[data.length - 1];
+        const latestDate = moment(latestEntry['Date and time'], 'DD/MM/YYYY HH:mm:ss');
+        const cutoffTime = latestDate.subtract(1, 'hours');
+
+        return data.filter(row => {
+            const dateTime = moment(row['Date and time'], 'DD/MM/YYYY HH:mm:ss');
+            return dateTime.isSameOrAfter(cutoffTime);
+        });
     }
 
     function updateCurrentValues(data) {
@@ -45,6 +58,36 @@ document.addEventListener('DOMContentLoaded', function () {
         // Calculate and update score
         const score = calculateScore(co2, temperature, humidity);
         gauge.refresh(score);
+    }
+
+    function updateMinMaxValues(data) {
+        if (data.length === 0) {
+            document.getElementById('min-co2').innerText = 'N/A';
+            document.getElementById('max-co2').innerText = 'N/A';
+            document.getElementById('min-temperature').innerText = 'N/A';
+            document.getElementById('max-temperature').innerText = 'N/A';
+            document.getElementById('min-humidity').innerText = 'N/A';
+            document.getElementById('max-humidity').innerText = 'N/A';
+            return;
+        }
+
+        const co2Values = data.map(row => parseFloat(row['CO2 ppm'])).filter(val => !isNaN(val));
+        const temperatureValues = data.map(row => parseFloat(row['Temperature Â°C'])).filter(val => !isNaN(val));
+        const humidityValues = data.map(row => parseFloat(row['RH %'])).filter(val => !isNaN(val));
+
+        const minCo2 = Math.min(...co2Values);
+        const maxCo2 = Math.max(...co2Values);
+        const minTemperature = Math.min(...temperatureValues);
+        const maxTemperature = Math.max(...temperatureValues);
+        const minHumidity = Math.min(...humidityValues);
+        const maxHumidity = Math.max(...humidityValues);
+
+        document.getElementById('min-co2').innerText = co2Values.length ? minCo2 : 'N/A';
+        document.getElementById('max-co2').innerText = co2Values.length ? maxCo2 : 'N/A';
+        document.getElementById('min-temperature').innerText = temperatureValues.length ? minTemperature : 'N/A';
+        document.getElementById('max-temperature').innerText = temperatureValues.length ? maxTemperature : 'N/A';
+        document.getElementById('min-humidity').innerText = humidityValues.length ? minHumidity : 'N/A';
+        document.getElementById('max-humidity').innerText = humidityValues.length ? maxHumidity : 'N/A';
     }
 
     function calculateScore(co2, temperature, humidity) {
