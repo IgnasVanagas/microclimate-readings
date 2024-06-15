@@ -234,3 +234,6 @@ canvas {
     margin-left: 20px;
     text-align: left;
 }
+.larger-value {
+    font-size: 1.5em; /* Adjust the size as needed */
+}
